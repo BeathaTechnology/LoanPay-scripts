@@ -1,0 +1,179 @@
+{
+	"info": {
+		"_postman_id": "5583ea6a-66ed-4e3f-a53a-6f0af0b5a0b0",
+		"name": "UMBA Direct integration",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "https://stage.mkopokaka.com/api/v1/order/",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "ca04bf6e-dade-4379-b5a9-8b0ce9fa07bc",
+						"exec": [
+							"var sigString = pm.request.body.toString();\r",
+							"var key = pm.environment.get(\"secret_key\");\r",
+							"\r",
+							"var sign = CryptoJS.HmacSHA256(sigString,key);\r",
+							"console.log(sign.toString());\r",
+							"\r",
+							"postman.setGlobalVariable(\"sign\", sign.toString());\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "API-Key",
+						"value": "{{api_post_key}}",
+						"type": "text"
+					},
+					{
+						"key": "API-Sign",
+						"value": "{{sign}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"email\": \"mislav@umba.com\", \"msisdn\": \"+254724884218\", \"ext_id\": \"1234\", \"vendor_id\": \"mydawa\", \"session_id\": \"1\", \"amount\": 1000, \"currency\": \"KES\", \"order_id\": \"1234\", \"user_agent\": \"mobile\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://stage.mkopokaka.com/api/v1/order/",
+					"protocol": "https",
+					"host": [
+						"stage",
+						"mkopokaka",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"order",
+						""
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://stage.mkopokaka.com/api/v1/order/limit",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "0f5add54-aea5-4f82-807e-7d964f1eb44f",
+						"exec": [
+							"var sigString = pm.request.body.toString();\r",
+							"var key = pm.environment.get(\"secret_key\");\r",
+							"\r",
+							"var sign = CryptoJS.HmacSHA256(sigString,key);\r",
+							"console.log(sign.toString());\r",
+							"\r",
+							"postman.setGlobalVariable(\"sign\", sign.toString());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "API-Key",
+						"value": "{{api_post_key}}",
+						"type": "text"
+					},
+					{
+						"key": "API-Sign",
+						"value": "{{sign}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"msisdn\": \"+254714924672\", \"merchant_id\": \"umba\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://stage.mkopokaka.com/api/v1/order/limit",
+					"protocol": "https",
+					"host": [
+						"stage",
+						"mkopokaka",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"order",
+						"limit"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
